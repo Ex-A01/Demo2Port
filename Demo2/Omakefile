@@ -1,0 +1,51 @@
+#!/usr/bin/env omake
+
+
+# Describes the target that the process supports.
+# The system name should always be "Process".
+SUPPORTED_TARGETS   =   CTR-T*.Process.MPCore.*
+
+SAMPLED_DEMOS_COMMON_INCLUDE_DIR   = $(dir ../common/include)
+INCLUDES           += $(SAMPLED_DEMOS_COMMON_INCLUDE_DIR)
+
+# Specifies the source code to build.
+SOURCES[]      =   
+                        demo2.cpp
+                        graphics.cpp
+                        mic.cpp
+                        snd.cpp
+
+
+# Specify the libraries to link. No extension is needed.
+# Although several standard libraries are automatically linked by the build system, libraries provided for a specific process must be explicitly specified here.
+# 
+# 
+#
+# Normally, for fast builds, libraries with the same optimization options as in libnn_demo.fast are linked, but optimization options such as libnn_demo.fast can also be explicitly specified.
+# 
+#   
+# 
+LIBS                +=  lib_demo lib_applet
+
+
+# Specifies the shader source code.
+SHADER_SOURCES[]    =
+                        shaders/VShader.vsh
+
+# Specifies directory to output the shader binary.
+SHBIN_INSTALL_ROOT  =   romfiles
+
+
+# Describes the program name.
+# No extension is needed.
+TARGET_PROGRAM      =   demo2
+
+# Specifies the parameters to pass to RSF.
+ROMFS_ROOT = romfiles   # ROMFS root path
+TITLE = demo2           # Application title
+
+CTR_BANNER_SPEC = demo2.bsf
+
+include $(ROOT_OMAKE)/modulerules
+
+build: $(DEFAULT_TARGETS)
